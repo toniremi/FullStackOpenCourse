@@ -3,28 +3,40 @@ const Header = (props) => {
   return <h1>{props.course}</h1>;
 };
 
+const Content = (props) => {
+  console.log(props);
+  return (
+    <div>
+      {props.parts.map((part, index) => (
+        <p key={index}>
+          {part.name} {part.exercises}
+        </p>
+      ))}
+    </div>
+  );
+};
+
 const App = () => {
+  // course titlle
   const course = "Half Stack application development";
-  const part1 = "Fundamentals of React";
-  const exercises1 = 10;
-  const part2 = "Using props to pass data";
-  const exercises2 = 7;
-  const part3 = "State of a component";
-  const exercises3 = 14;
+  // course parts into an array
+  const parts = [
+    { name: "Fundamentals of React", exercises: 10 },
+    { name: "Using props to pass data", exercises: 7 },
+    { name: "State of a component", exercises: 14 },
+  ];
+
+  // calculate total exercises
+  let totalExercises = 0;
+  for (let i = 0; i < parts.length; i++) {
+    totalExercises += parts[i].exercises;
+  }
 
   return (
     <div>
       <Header course={course} />
-      <p>
-        {part1} {exercises1}
-      </p>
-      <p>
-        {part2} {exercises2}
-      </p>
-      <p>
-        {part3} {exercises3}
-      </p>
-      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
+      <Content parts={parts} />
+      <p>Number of exercises {totalExercises}</p>
     </div>
   );
 };
