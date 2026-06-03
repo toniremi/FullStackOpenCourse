@@ -16,6 +16,11 @@ const Content = (props) => {
   );
 };
 
+const Total = (props) => {
+  console.log(props);
+  return <p>Number of exercises {props.total}</p>;
+};
+
 const App = () => {
   // course titlle
   const course = "Half Stack application development";
@@ -27,16 +32,13 @@ const App = () => {
   ];
 
   // calculate total exercises
-  let totalExercises = 0;
-  for (let i = 0; i < parts.length; i++) {
-    totalExercises += parts[i].exercises;
-  }
+  const totalExercises = parts.reduce((sum, part) => sum + part.exercises, 0);
 
   return (
     <div>
       <Header course={course} />
       <Content parts={parts} />
-      <p>Number of exercises {totalExercises}</p>
+      <Total total={totalExercises} />
     </div>
   );
 };
