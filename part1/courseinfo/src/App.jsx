@@ -6,11 +6,17 @@ const Content = (props) => {
   return (
     <div>
       {props.parts.map((part, index) => (
-        <p key={index}>
-          {part.name} {part.exercises}
-        </p>
+        <Part key={index} name={part.name} exercises={part.exercises} />
       ))}
     </div>
+  );
+};
+
+const Part = (props) => {
+  return (
+    <p>
+      {props.name} {props.exercises}
+    </p>
   );
 };
 
