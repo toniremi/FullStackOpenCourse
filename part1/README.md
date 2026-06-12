@@ -7,6 +7,12 @@ The course material for Part 1 is split into multiple sections.
 You can view the original course material for Part 1a Exercises 1.1.-1.2. here:
 https://fullstackopen.com/en/part1/introduction_to_react#exercises-1-1-1-2
 
+You can view the original course material for Part 1b Exercises 1.3.-1.5. here:
+https://fullstackopen.com/en/part1/java_script#exercises-1-3-1-5
+
+You can view the original course material for Part 1d Exercises 1.6.-1.14. here:
+https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14
+
 ## Exercises Status
 
 - ✅ **1.1:** Course Information, step 1
