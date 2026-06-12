@@ -1,5 +1,11 @@
 import { useState } from "react";
 
+// button component to display a button with given text and onClick handler
+const Button = ({ onClick, text }) => {
+  console.log("Button component rendered with text:", text);
+  return <button onClick={onClick}>{text}</button>;
+};
+
 // single statistic line component to display a single statistic
 const StatisticLine = ({ text, value }) => {
   console.log(
@@ -92,9 +98,9 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <button onClick={handleGoodClick}>good</button>
-      <button onClick={handleNeutralClick}>neutral</button>
-      <button onClick={handleBadClick}>bad</button>
+      <Button onClick={handleGoodClick} text="good" />
+      <Button onClick={handleNeutralClick} text="neutral" />
+      <Button onClick={handleBadClick} text="bad" />
       <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   );
