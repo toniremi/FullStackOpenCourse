@@ -24,17 +24,29 @@ const Statistics = ({ good, neutral, bad }) => {
     positivePercentage = (good / total) * 100;
   }
 
-  return (
-    <div>
-      <h1>statistics</h1>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>total {total}</p>
-      <p>average {average}</p>
-      <p>positive {positivePercentage}%</p>
-    </div>
-  );
+  // only render statistics if there is at least one feedback given, otherwise show "No feedback given"
+  if (total > 0) {
+    // render statistics with total, average, and positive percentage
+    return (
+      <div>
+        <h1>statistics</h1>
+        <p>good {good}</p>
+        <p>neutral {neutral}</p>
+        <p>bad {bad}</p>
+        <p>total {total}</p>
+        <p>average {average}</p>
+        <p>positive {positivePercentage}%</p>
+      </div>
+    );
+  } else {
+    // render "No feedback given" if there is no feedback
+    return (
+      <div>
+        <h1>statistics</h1>
+        <p>No feedback given</p>
+      </div>
+    );
+  }
 };
 
 const App = () => {
