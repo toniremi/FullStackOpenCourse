@@ -6,12 +6,32 @@ const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
+  // event handlers for each button giving feedback
+  const handleGoodClick = () => {
+    console.log("good feedback clicked", good);
+    setGood(good + 1);
+  };
+
+  const handleNeutralClick = () => {
+    console.log("neutral feedback clicked", neutral);
+    setNeutral(neutral + 1);
+  };
+
+  const handleBadClick = () => {
+    console.log("bad feedback clicked", bad);
+    setBad(bad + 1);
+  };
+
   return (
     <div>
       <h1>give feedback</h1>
-      <button onClick={() => setGood(good + 1)}>good</button>
-      <button onClick={() => setNeutral(neutral + 1)}>neutral</button>
-      <button onClick={() => setBad(bad + 1)}>bad</button>
+      <button onClick={handleGoodClick}>good</button>
+      <button onClick={handleNeutralClick}>neutral</button>
+      <button onClick={handleBadClick}>bad</button>
+      <h1>statistics</h1>
+      <p>good {good}</p>
+      <p>neutral {neutral}</p>
+      <p>bad {bad}</p>
     </div>
   );
 };
