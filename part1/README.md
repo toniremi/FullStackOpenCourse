@@ -14,6 +14,12 @@ https://fullstackopen.com/en/part1/introduction_to_react#exercises-1-1-1-2
 - ✅ **1.3:** Course Information, step 3
 - ✅ **1.4:** Course Information, step 4
 - ✅ **1.5:** Course Information, step 5
+- ✅ **1.6:** Unicafe, step 1
+- ✅ **1.7:** Unicafe, step 2
+- ✅ **1.8:** Unicafe, step 3
+- ✅ **1.9:** Unicafe, step 4
+- ✅ **1.10:** Unicafe, step 5
+- ✅ **1.11:** Unicafe, step 6
 
 ## How to Run the Project
 
