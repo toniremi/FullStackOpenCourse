@@ -1,5 +1,20 @@
 import { useState } from "react";
 
+// single statistic line component to display a single statistic
+const StatisticLine = ({ text, value }) => {
+  console.log(
+    "StatisticLine component rendered with text:",
+    text,
+    "value:",
+    value,
+  );
+  return (
+    <p>
+      {text} {value}
+    </p>
+  );
+};
+
 // statistics component to display feedback statistics
 const Statistics = ({ good, neutral, bad }) => {
   console.log(
@@ -30,12 +45,15 @@ const Statistics = ({ good, neutral, bad }) => {
     return (
       <div>
         <h1>statistics</h1>
-        <p>good {good}</p>
-        <p>neutral {neutral}</p>
-        <p>bad {bad}</p>
-        <p>total {total}</p>
-        <p>average {average}</p>
-        <p>positive {positivePercentage}%</p>
+        <StatisticLine text="good" value={good} />
+        <StatisticLine text="neutral" value={neutral} />
+        <StatisticLine text="bad" value={bad} />
+        <StatisticLine text="total" value={total} />
+        <StatisticLine text="average" value={average.toFixed(2)} />
+        <StatisticLine
+          text="positive"
+          value={positivePercentage.toFixed(2) + "%"}
+        />
       </div>
     );
   } else {
