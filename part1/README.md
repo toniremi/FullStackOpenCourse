@@ -20,10 +20,13 @@ https://fullstackopen.com/en/part1/introduction_to_react#exercises-1-1-1-2
 - ✅ **1.9:** Unicafe, step 4
 - ✅ **1.10:** Unicafe, step 5
 - ✅ **1.11:** Unicafe, step 6
+- ✅ **1.12:** Anecdote, step 1
+- ✅ **1.13:** Anecdote, step 2
+- ✅ **1.14:** Anecdote, step 3
 
 ## How to Run the Project
 
-Make sure to run these commands on the proper directory. You should see a `package.json` document on the directory where you will run these commands.
+Make sure to run these commands on the proper directory (ie: courseinfo, unicafe or anecdotes). You should see a `package.json` document on the directory where you will run these commands.
 
 1. Install dependencies: `npm install`
 2. Start the development server: `npm run dev`
