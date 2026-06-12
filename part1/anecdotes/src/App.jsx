@@ -1,5 +1,31 @@
 import { useState } from "react";
 
+// component to display the current anecdote of the day with its votes and buttons to vote and show next anecdote
+const AnecdoteOfTheDay = ({
+  selectedAnecdote,
+  votes,
+  onVote,
+  onNextAnecdote,
+}) => {
+  console.log(
+    "AnecdoteOfTheDay component rendered with selectedAnecdote:",
+    selectedAnecdote,
+    "votes:",
+    votes,
+  );
+  return (
+    <div>
+      <h1>Anecdote of the day</h1>
+      {selectedAnecdote}
+      <br />
+      <Votes votes={votes} />
+      <button onClick={onVote}>vote</button>
+      <button onClick={onNextAnecdote}>next anecdote</button>
+    </div>
+  );
+};
+
+// component to display the anecdote with the most votes
 const AnecdoteWithMostVotes = ({ anecdotes, votes }) => {
   // find the value in the votes array that has the most votes
   const maxVotes = Math.max(...votes);
@@ -28,6 +54,7 @@ const AnecdoteWithMostVotes = ({ anecdotes, votes }) => {
   }
 };
 
+// component to display the number of votes an anecdote has
 const Votes = ({ votes }) => {
   console.log("Votes component rendered with votes:", votes);
 
@@ -75,12 +102,12 @@ const App = () => {
 
   return (
     <div>
-      <h1>Anecdote of the day</h1>
-      {anecdotes[selected]}
-      <br />
-      <Votes votes={votes[selected]} />
-      <button onClick={handleVote}>vote</button>
-      <button onClick={handleNextAnecdote}>next anecdote</button>
+      <AnecdoteOfTheDay
+        selectedAnecdote={anecdotes[selected]}
+        votes={votes[selected]}
+        onVote={handleVote}
+        onNextAnecdote={handleNextAnecdote}
+      />
       <AnecdoteWithMostVotes anecdotes={anecdotes} votes={votes} />
     </div>
   );
