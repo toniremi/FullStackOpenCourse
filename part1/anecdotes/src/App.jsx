@@ -1,5 +1,33 @@
 import { useState } from "react";
 
+const AnecdoteWithMostVotes = ({ anecdotes, votes }) => {
+  // find the value in the votes array that has the most votes
+  const maxVotes = Math.max(...votes);
+  console.log("Maximum votes:", maxVotes);
+  // find the index of the anecdote with the most votes using maxVotes
+  const indexOfMaxVotes = votes.indexOf(maxVotes);
+  console.log("Index of anecdote with most votes:", indexOfMaxVotes);
+
+  // if there are no votes, show "No votes given"
+  if (maxVotes === 0) {
+    return (
+      <div>
+        <h1>Anecdote with most votes</h1>
+        <div>No votes given</div>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <h1>Anecdote with most votes</h1>
+        {anecdotes[indexOfMaxVotes]}
+        <br />
+        <Votes votes={votes[indexOfMaxVotes]} />
+      </div>
+    );
+  }
+};
+
 const Votes = ({ votes }) => {
   console.log("Votes component rendered with votes:", votes);
 
@@ -47,11 +75,13 @@ const App = () => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]}
       <br />
       <Votes votes={votes[selected]} />
       <button onClick={handleVote}>vote</button>
       <button onClick={handleNextAnecdote}>next anecdote</button>
+      <AnecdoteWithMostVotes anecdotes={anecdotes} votes={votes} />
     </div>
   );
 };
