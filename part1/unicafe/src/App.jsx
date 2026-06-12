@@ -6,6 +6,20 @@ const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
+  // extra statistics
+  const total = good + neutral + bad;
+  // get the average
+  let average = 0;
+  if (total > 0) {
+    // calculate average score using good as +1, neutral as 0, and bad as -1
+    average = (good - bad) / total;
+  }
+  // calculate percentage of positive feedback
+  let positivePercentage = 0;
+  if (total > 0) {
+    positivePercentage = (good / total) * 100;
+  }
+
   // event handlers for each button giving feedback
   const handleGoodClick = () => {
     console.log("good feedback clicked", good);
@@ -32,6 +46,9 @@ const App = () => {
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
+      <p>total {total}</p>
+      <p>average {average}</p>
+      <p>positive {positivePercentage}%</p>
     </div>
   );
 };
