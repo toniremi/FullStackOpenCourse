@@ -1,5 +1,17 @@
 import { useState } from "react";
 
+const Votes = ({ votes }) => {
+  console.log("Votes component rendered with votes:", votes);
+
+  if (votes === 0) {
+    return <div>has no votes</div>;
+  } else if (votes === 1) {
+    return <div>has 1 vote</div>;
+  } else {
+    return <div>has {votes} votes</div>;
+  }
+};
+
 const App = () => {
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -13,7 +25,18 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));
 
+  // vote button click handler
+  const handleVote = () => {
+    console.log("Vote button clicked for anecdote index:", selected);
+    // make a copy of the votes array
+    const newVotes = [...votes];
+    // increment the vote count for the currently selected anecdote
+    newVotes[selected] += 1;
+    // update the votes state with the new votes array
+    setVotes(newVotes);
+  };
   // next anectode button click handler
   const handleNextAnecdote = () => {
     // get random value from our array
@@ -26,6 +49,8 @@ const App = () => {
     <div>
       {anecdotes[selected]}
       <br />
+      <Votes votes={votes[selected]} />
+      <button onClick={handleVote}>vote</button>
       <button onClick={handleNextAnecdote}>next anecdote</button>
     </div>
   );
