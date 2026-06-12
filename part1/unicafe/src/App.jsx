@@ -1,17 +1,21 @@
 import { useState } from "react";
 
-const App = () => {
-  // save clicks of each button to its own state
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
-
+// statistics component to display feedback statistics
+const Statistics = ({ good, neutral, bad }) => {
+  console.log(
+    "Statistics component rendered with good:",
+    good,
+    "neutral:",
+    neutral,
+    "bad:",
+    bad,
+  );
   // extra statistics
   const total = good + neutral + bad;
   // get the average
   let average = 0;
   if (total > 0) {
-    // calculate average score using good as +1, neutral as 0, and bad as -1
+    // calculate average feedback using good as +1, neutral as 0, and bad as -1
     average = (good - bad) / total;
   }
   // calculate percentage of positive feedback
@@ -19,6 +23,25 @@ const App = () => {
   if (total > 0) {
     positivePercentage = (good / total) * 100;
   }
+
+  return (
+    <div>
+      <h1>statistics</h1>
+      <p>good {good}</p>
+      <p>neutral {neutral}</p>
+      <p>bad {bad}</p>
+      <p>total {total}</p>
+      <p>average {average}</p>
+      <p>positive {positivePercentage}%</p>
+    </div>
+  );
+};
+
+const App = () => {
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
   // event handlers for each button giving feedback
   const handleGoodClick = () => {
@@ -42,13 +65,7 @@ const App = () => {
       <button onClick={handleGoodClick}>good</button>
       <button onClick={handleNeutralClick}>neutral</button>
       <button onClick={handleBadClick}>bad</button>
-      <h1>statistics</h1>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>total {total}</p>
-      <p>average {average}</p>
-      <p>positive {positivePercentage}%</p>
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   );
 };
