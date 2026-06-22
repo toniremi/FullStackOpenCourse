@@ -1,15 +1,24 @@
-const Header = (props) => <h1>{props.course}</h1>;
-
 const Course = (props) => {
   const { course } = props;
+
+  // create an array with the number of exercises for each part
+  const exercisesCount = course.parts.map((part) => part.exercises);
+  // calculate the total number of exercises by summing the exercisesCount array
+  let totalExercises = 0;
+  for (let i = 0; i < exercisesCount.length; i++) {
+    totalExercises += exercisesCount[i];
+  }
 
   return (
     <div>
       <Header course={course.name} />
       <Content parts={course.parts} />
+      <Total total={totalExercises} />
     </div>
   );
 };
+
+const Header = (props) => <h1>{props.course}</h1>;
 
 const Content = ({ parts }) => (
   <div>
@@ -26,7 +35,9 @@ const Part = ({ part }) => (
 );
 
 // This component is not needed for now, but it might be used in the next exercises
-// const Total = (props) => <p>Number of exercises {props.total}</p>;
+const Total = (props) => (
+  <p style={{ fontWeight: "bold" }}>Total of exercises {props.total}</p>
+);
 
 const App = () => {
   const course = {
