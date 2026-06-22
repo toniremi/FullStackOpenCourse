@@ -1,13 +1,11 @@
 const Course = (props) => {
   const { course } = props;
 
-  // create an array with the number of exercises for each part
-  const exercisesCount = course.parts.map((part) => part.exercises);
-  // calculate the total number of exercises by summing the exercisesCount array
-  let totalExercises = 0;
-  for (let i = 0; i < exercisesCount.length; i++) {
-    totalExercises += exercisesCount[i];
-  }
+  // calculate total exercises using the parts array and reduce method
+  const totalExercises = course.parts.reduce(
+    (sum, part) => sum + part.exercises,
+    0,
+  );
 
   return (
     <div>
