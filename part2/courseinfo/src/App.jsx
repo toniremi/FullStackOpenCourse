@@ -1,6 +1,4 @@
-const Course = (props) => {
-  const { course } = props;
-
+const Course = ({ course }) => {
   // calculate total exercises using the parts array and reduce method
   const totalExercises = course.parts.reduce(
     (sum, part) => sum + part.exercises,
