@@ -1,5 +1,16 @@
 const Header = (props) => <h1>{props.course}</h1>;
 
+const Course = (props) => {
+  const { course } = props;
+
+  return (
+    <div>
+      <Header course={course.name} />
+      <Content parts={course.parts} />
+    </div>
+  );
+};
+
 const Content = (props) => (
   <div>
     <Part part={props.parts[0]} />
@@ -14,7 +25,8 @@ const Part = (props) => (
   </p>
 );
 
-const Total = (props) => <p>Number of exercises {props.total}</p>;
+// This component is not needed for now, but it might be used in the next exercises
+// const Total = (props) => <p>Number of exercises {props.total}</p>;
 
 const App = () => {
   const course = {
@@ -39,19 +51,7 @@ const App = () => {
     ],
   };
 
-  return (
-    <div>
-      <Header course={course.name} />
-      <Content parts={course.parts} />
-      <Total
-        total={
-          course.parts[0].exercises +
-          course.parts[1].exercises +
-          course.parts[2].exercises
-        }
-      />
-    </div>
-  );
+  return <Course course={course} />;
 };
 
 export default App;
