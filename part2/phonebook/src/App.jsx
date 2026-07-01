@@ -8,6 +8,19 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault();
     console.log("button clicked", event.target);
+
+    console.log("newName", newName);
+    console.log("persons", persons);
+
+    // before adding the new person, check if the name already exists in the persons array
+    if (persons.some((person) => person.name === newName)) {
+      console.log(`${newName} is already added to phonebook`);
+      // print an alert since this name is on the array already
+      alert(`${newName} is already added to phonebook`);
+      // return to stop execution of the function
+      return;
+    }
+
     const personObject = {
       name: newName,
     };
