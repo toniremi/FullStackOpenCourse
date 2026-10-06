@@ -48,10 +48,17 @@ const App = () => {
       id: persons.length + 1,
     };
 
-    setPersons(persons.concat(personObject));
-    // reset input field states to empty
-    setNewName("");
-    setNewNumber("");
+    // add the new person to the server
+    axios
+      .post("http://localhost:3001/persons", personObject)
+      .then((response) => {
+        console.log(response.data);
+        // add the person to our persons array and set the state to the new array
+        setPersons(persons.concat(response.data));
+        // reset input field states to empty
+        setNewName("");
+        setNewNumber("");
+      });
   };
 
   // create the event handler for the input field and set the value of newName to the value of the input field
