@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import personsService from "./services/persons";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
@@ -13,9 +13,10 @@ const App = () => {
   // create a persons hook to fetch the data from the server and set the persons state
   const personsHook = () => {
     console.log("effect");
-    axios.get("http://localhost:3001/persons").then((response) => {
+    // use our personsService to get all the persons from the server and set the state
+    personsService.getAll().then((initialPersons) => {
       console.log("promise fulfilled");
-      setPersons(response.data);
+      setPersons(initialPersons);
     });
   };
 
@@ -49,16 +50,13 @@ const App = () => {
     };
 
     // add the new person to the server
-    axios
-      .post("http://localhost:3001/persons", personObject)
-      .then((response) => {
-        console.log(response.data);
-        // add the person to our persons array and set the state to the new array
-        setPersons(persons.concat(response.data));
-        // reset input field states to empty
-        setNewName("");
-        setNewNumber("");
-      });
+    personsService.create(personObject).then((returnedPerson) => {
+      // add the person to our persons array and set the state to the new array
+      setPersons(persons.concat(returnedPerson));
+      // reset input field states to empty
+      setNewName("");
+      setNewNumber("");
+    });
   };
 
   // create the event handler for the input field and set the value of newName to the value of the input field
