@@ -36,26 +36,59 @@ const App = () => {
     // before adding the new person, check if the name already exists in the persons array
     if (persons.some((person) => person.name === newName)) {
       console.log(`${newName} is already added to phonebook`);
-      // print an alert since this name is on the array already
-      alert(`${newName} is already added to phonebook`);
-      // return to stop execution of the function
-      return;
+
+      // get the already existing person object from the persons array
+      const existingPerson = persons.find((person) => person.name === newName);
+      console.log("existingPerson", existingPerson);
+      // if the phone number is different we will ask about updating the number
+      if (existingPerson.number !== newNumber) {
+        // ask the user if they want to update the number
+        if (
+          window.confirm(
+            `${newName} is already added to phonebook, replace the old number with a new one?`,
+          )
+        ) {
+          // create a new person object with the updated number
+          const updatedPerson = { ...existingPerson, number: newNumber };
+          console.log("updatedPerson", updatedPerson);
+          // update the person on the server
+          personsService
+            .update(existingPerson.id, updatedPerson)
+            .then((returnedPerson) => {
+              console.log("returnedPerson", returnedPerson);
+              // update the persons array with the updated person
+              setPersons(
+                persons.map((person) =>
+                  person.id == existingPerson.id ? returnedPerson : person,
+                ),
+              );
+              // reset input field states to empty
+              setNewName("");
+              setNewNumber("");
+            });
+        }
+      } else {
+        // print an alert since this name is on the array already
+        alert(`${newName} is already added to phonebook`);
+        // return to stop execution of the function
+        return;
+      }
+    } else {
+      // set our new person object
+      const personObject = {
+        name: newName,
+        number: newNumber,
+      };
+
+      // add the new person to the server
+      personsService.create(personObject).then((returnedPerson) => {
+        // add the person to our persons array and set the state to the new array
+        setPersons(persons.concat(returnedPerson));
+        // reset input field states to empty
+        setNewName("");
+        setNewNumber("");
+      });
     }
-
-    // set our person object
-    const personObject = {
-      name: newName,
-      number: newNumber,
-    };
-
-    // add the new person to the server
-    personsService.create(personObject).then((returnedPerson) => {
-      // add the person to our persons array and set the state to the new array
-      setPersons(persons.concat(returnedPerson));
-      // reset input field states to empty
-      setNewName("");
-      setNewNumber("");
-    });
   };
 
   // create the event handler for the input field and set the value of newName to the value of the input field
