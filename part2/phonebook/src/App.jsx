@@ -75,6 +75,26 @@ const App = () => {
     setFilter(event.target.value);
   };
 
+  const deletePersonWithId = (id) => {
+    console.log("delete person with id", id);
+    // find the person to delete
+    const personToDelete = persons.find((person) => person.id === id);
+    console.log("person to delete", personToDelete);
+
+    // confirm the deletion with the user
+    if (window.confirm(`Delete ${personToDelete.name}?`)) {
+      console.log("deleting person ", personToDelete.name, " with id", id);
+      personsService.remove(id).then((response) => {
+        console.log("response from server", response);
+        console.log("deleted person with id", id);
+        // get the updated persons array without the deleted person
+        const updatedPersons = persons.filter((person) => person.id !== id);
+        // update the persons state to remove the deleted person
+        setPersons(updatedPersons);
+      });
+    }
+  };
+
   return (
     <div>
       <h1>Phonebook</h1>
@@ -88,7 +108,11 @@ const App = () => {
         handleNumberChange={handleNumberChange}
       />
       <h2>Numbers</h2>
-      <Persons persons={persons} filter={filter} />
+      <Persons
+        persons={persons}
+        filter={filter}
+        deletePerson={deletePersonWithId}
+      />
     </div>
   );
 };
