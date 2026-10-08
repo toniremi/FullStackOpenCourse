@@ -3,12 +3,14 @@ import personsService from "./services/persons";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
+  const [successMessage, setSuccessMessage] = useState(null);
 
   // create a persons hook to fetch the data from the server and set the persons state
   const personsHook = () => {
@@ -65,6 +67,12 @@ const App = () => {
               // reset input field states to empty
               setNewName("");
               setNewNumber("");
+              // set the success message to show the user that the number was updated
+              setSuccessMessage(`Updated ${returnedPerson.name}'s number`);
+              // clear the success message after 5 seconds
+              setTimeout(() => {
+                setSuccessMessage(null);
+              }, 5000);
             });
         }
       } else {
@@ -87,6 +95,12 @@ const App = () => {
         // reset input field states to empty
         setNewName("");
         setNewNumber("");
+        // set the success message to show the user that the number was added
+        setSuccessMessage(`Added ${returnedPerson.name}`);
+        // clear the success message after 5 seconds
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 5000);
       });
     }
   };
@@ -131,6 +145,7 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
+      <Notification message={successMessage} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <h2>Add a new person</h2>
       <PersonForm
