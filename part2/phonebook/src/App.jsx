@@ -10,7 +10,10 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
-  const [successMessage, setSuccessMessage] = useState(null);
+  const [notification, setNotification] = useState({
+    message: null,
+    type: null,
+  });
 
   // create a persons hook to fetch the data from the server and set the persons state
   const personsHook = () => {
@@ -68,10 +71,31 @@ const App = () => {
               setNewName("");
               setNewNumber("");
               // set the success message to show the user that the number was updated
-              setSuccessMessage(`Updated ${returnedPerson.name}'s number`);
+              setNotification({
+                message: `Updated ${returnedPerson.name}'s number`,
+                type: "success",
+              });
               // clear the success message after 5 seconds
               setTimeout(() => {
-                setSuccessMessage(null);
+                setNotification({
+                  message: null,
+                  type: null,
+                });
+              }, 5000);
+            })
+            .catch((error) => {
+              console.log("error", error);
+              // set the error message to show the user that the number was already removed from the server
+              setNotification({
+                message: `Information of ${newName} has already been removed from server`,
+                type: "error",
+              });
+              // clear the error message after 5 seconds
+              setTimeout(() => {
+                setNotification({
+                  message: null,
+                  type: null,
+                });
               }, 5000);
             });
         }
@@ -96,10 +120,16 @@ const App = () => {
         setNewName("");
         setNewNumber("");
         // set the success message to show the user that the number was added
-        setSuccessMessage(`Added ${returnedPerson.name}`);
+        setNotification({
+          message: `Added ${returnedPerson.name}`,
+          type: "success",
+        });
         // clear the success message after 5 seconds
         setTimeout(() => {
-          setSuccessMessage(null);
+          setNotification({
+            message: null,
+            type: null,
+          });
         }, 5000);
       });
     }
@@ -145,7 +175,7 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <Notification message={successMessage} />
+      <Notification notification={notification} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <h2>Add a new person</h2>
       <PersonForm
