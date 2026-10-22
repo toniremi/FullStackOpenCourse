@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import countriesService from "./services/countries";
 import Filter from "./components/Filter";
 import SearchResults from "./components/SearchResults";
+import Country from "./components/Country";
 
 function App() {
   const [filter, setFilter] = useState("");
@@ -41,6 +42,9 @@ function App() {
       )}
       {filteredCountries.length === 0 && filter !== "" && (
         <p>No countries found</p>
+      )}
+      {filteredCountries.length === 1 && (
+        <Country country={filteredCountries[0]} />
       )}
     </div>
   );
