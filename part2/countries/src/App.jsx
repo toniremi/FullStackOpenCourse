@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import countriesService from "./services/countries";
 import Filter from "./components/Filter";
+import SearchResults from "./components/SearchResults";
 
 function App() {
   const [filter, setFilter] = useState("");
@@ -24,9 +25,20 @@ function App() {
     setFilter(event.target.value);
   };
 
+  // create our filtered countries array by filtering the countries array based on the filter state
+  const filteredCountries =
+    filter === ""
+      ? []
+      : countries.filter((country) =>
+          country.name.common.toLowerCase().includes(filter.toLowerCase()),
+        );
+
   return (
     <div>
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
+      {filteredCountries.length > 1 && (
+        <SearchResults filteredCountries={filteredCountries} />
+      )}
     </div>
   );
 }
