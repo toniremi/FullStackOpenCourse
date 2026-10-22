@@ -39,6 +39,9 @@ function App() {
       {filteredCountries.length > 1 && (
         <SearchResults filteredCountries={filteredCountries} />
       )}
+      {filteredCountries.length === 0 && filter !== "" && (
+        <p>No countries found</p>
+      )}
     </div>
   );
 }
