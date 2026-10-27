@@ -1,3 +1,4 @@
+import Weather from "./Weather";
 import LanguagesList from "./LanguagesList";
 
 const Country = ({ country }) => {
@@ -8,6 +9,7 @@ const Country = ({ country }) => {
       <p>Population: {country.population}</p>
       <LanguagesList languages={country.languages} />
       <img src={country.flags.png} alt={`Flag of ${country.name.common}`} />
+      <Weather capital={country.capital} countryCode={country.cca2} />
     </div>
   );
 };
