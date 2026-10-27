@@ -1,4 +1,4 @@
-const SearchResults = ({ filteredCountries }) => {
+const SearchResults = ({ filteredCountries, showCountry }) => {
   // if there are more than 10 filtered countries, return a message to the user to specify another filter
   if (filteredCountries.length > 10) {
     return <p>Too many matches, specify another filter</p>;
@@ -9,7 +9,10 @@ const SearchResults = ({ filteredCountries }) => {
     return (
       <div>
         {filteredCountries.map((country) => (
-          <div key={country.name.common}>{country.name.common}</div>
+          <div key={country.name.common}>
+            {country.name.common}
+            <button onClick={() => showCountry(country)}>Show</button>
+          </div>
         ))}
       </div>
     );
