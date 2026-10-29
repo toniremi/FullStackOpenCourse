@@ -26,6 +26,11 @@ let persons = [
   },
 ];
 
+const generateId = () => {
+  const maxRange = 1000000000;
+  return String(Math.floor(Math.random() * maxRange));
+};
+
 app.get("/", (request, response) => {
   response.send("<h1>Hello World!</h1>");
 });
