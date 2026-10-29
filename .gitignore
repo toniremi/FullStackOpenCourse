@@ -28,3 +28,7 @@ dist-ssr
 
 # ignore the json-server db file, which is used to store the phonebook data
 part2/phonebook/db.json
+
+# ignore postman folder
+postman
+.postman
