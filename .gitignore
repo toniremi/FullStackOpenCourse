@@ -29,6 +29,9 @@ dist-ssr
 # ignore the json-server db file, which is used to store the phonebook data
 part2/phonebook/db.json
 
+# ignore part 3 backend folder used during the course, which is not related to exercise code
+/part3/backend/
+
 # ignore postman folder
 postman
 .postman
