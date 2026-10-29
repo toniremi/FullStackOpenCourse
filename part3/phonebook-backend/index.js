@@ -68,6 +68,25 @@ app.delete("/api/persons/:id", (request, response) => {
   response.status(204).end();
 });
 
+// create person entry
+app.post("/api/persons", (request, response) => {
+  // get the body of the request
+  const body = request.body;
+
+  // create our person object with the data from the request body and a generated id
+  const person = {
+    name: body.name,
+    number: body.number,
+    id: generateId(),
+  };
+
+  // add the person to our persons array
+  persons = persons.concat(person);
+
+  // return the added person as the response
+  response.json(person);
+});
+
 // set up server to listen on port 3001
 const PORT = 3001;
 app.listen(PORT, () => {
