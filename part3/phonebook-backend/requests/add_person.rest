@@ -1,0 +1,16 @@
+### Add person
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "name": "Marie Curie",
+    "number": "043-123456"
+}
+
+### Add person missing number
+POST http://localhost:3001/api/persons
+content-type: application/json
+
+{
+    "name": "Marie Curie"
+}
