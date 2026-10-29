@@ -72,6 +72,15 @@ app.delete("/api/persons/:id", (request, response) => {
 app.post("/api/persons", (request, response) => {
   // get the body of the request
   const body = request.body;
+  console.log("Request body:", body);
+
+  // check if the name or number is missing
+  if (!body.name || !body.number) {
+    console.log("Name or number missing");
+    return response.status(400).json({
+      error: "name or number missing",
+    });
+  }
 
   // create our person object with the data from the request body and a generated id
   const person = {
