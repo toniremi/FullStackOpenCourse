@@ -2,9 +2,22 @@ const express = require("express");
 const morgan = require("morgan");
 const app = express();
 
+// Morgan custom token to log the request body for POST requests
+morgan.token("body", (req) => {
+  // only log the request body for POST requests
+  if (req.method === "POST") {
+    return JSON.stringify(req.body);
+  }
+  return "";
+});
+
 // Middleware
 app.use(express.json());
-app.use(morgan("tiny"));
+app.use(
+  // :method :url :status :res[content-length] - :response-time ms is equivalent of 'tiny' format
+  // then we also attach our :body token to log the request body for POST requests
+  morgan(":method :url :status :res[content-length] - :response-time ms :body"),
+);
 
 let persons = [
   {
@@ -75,7 +88,6 @@ app.delete("/api/persons/:id", (request, response) => {
 app.post("/api/persons", (request, response) => {
   // get the body of the request
   const body = request.body;
-  console.log("Request body:", body);
 
   // check if the name or number is missing
   if (!body.name || !body.number) {
