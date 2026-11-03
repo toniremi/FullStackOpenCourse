@@ -23,14 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-# specific folders used during the course that are not related to exercise code\
-/part2/notes/
-
 # ignore the json-server db file, which is used to store the phonebook data
 part2/phonebook/db.json
-
-# ignore part 3 backend folder used during the course, which is not related to exercise code
-/part3/notes-backend/
 
 # ignore postman folder
 postman
