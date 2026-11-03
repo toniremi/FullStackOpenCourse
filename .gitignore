@@ -30,7 +30,7 @@ dist-ssr
 part2/phonebook/db.json
 
 # ignore part 3 backend folder used during the course, which is not related to exercise code
-/part3/backend/
+/part3/notes-backend/
 
 # ignore postman folder
 postman
