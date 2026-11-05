@@ -18,6 +18,8 @@ app.use(
   // then we also attach our :body token to log the request body for POST requests
   morgan(":method :url :status :res[content-length] - :response-time ms :body"),
 );
+// Serve static files from the 'dist' directory
+app.use(express.static("dist"));
 
 let persons = [
   {
