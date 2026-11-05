@@ -1,1 +1,5 @@
+### Get all persons
 GET http://localhost:3001/api/persons
+
+### Get all persons (Remote)
+GET https://fullstackopencourse-phonebook-jx62.onrender.com/api/persons
