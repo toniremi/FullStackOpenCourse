@@ -20,11 +20,22 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model("Note", noteSchema);
 
+/*
+ * Fetch all notes
+Note.find({}).then((result) => {
+  result.forEach((note) => {
+    console.log(note);
+  });
+  mongoose.connection.close();
+});*/
+
+// Create a new note
 const note = new Note({
   content: "HTML is easy",
   important: true,
 });
 
+// Save the note to the database
 note.save().then((result) => {
   console.log("note saved!");
   mongoose.connection.close();
