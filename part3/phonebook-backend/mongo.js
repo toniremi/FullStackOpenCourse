@@ -12,3 +12,12 @@ const url = `mongodb+srv://antoniremeseiro_db_user:${password}@cluster0.j1rvvzg.
 mongoose.set("strictQuery", false);
 
 mongoose.connect(url, { family: 4 });
+
+// Create a schema for the phonebook entries
+const personSchema = new mongoose.Schema({
+  name: String,
+  number: String,
+});
+
+// Create a model for the phonebook entries
+const Person = mongoose.model("Person", personSchema);
