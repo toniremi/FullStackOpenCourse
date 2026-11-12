@@ -21,3 +21,19 @@ const personSchema = new mongoose.Schema({
 
 // Create a model for the phonebook entries
 const Person = mongoose.model("Person", personSchema);
+
+// depending on the number of arguments, either fetch all persons or create a new person
+// if only password is provided, fetch all persons
+if (process.argv.length === 3) {
+  // Fetch all persons
+  Person.find({}).then((result) => {
+    console.log("phonebook:");
+    result.forEach((person) => {
+      console.log(person.name, person.number);
+    });
+    mongoose.connection.close();
+  });
+} else {
+  console.log("Invalid number of arguments");
+  process.exit(1);
+}
