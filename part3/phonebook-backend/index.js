@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
+const Person = require("./models/person");
 const app = express();
 
 // Morgan custom token to log the request body for POST requests
@@ -66,7 +67,9 @@ app.get("/info", (request, response) => {
 
 // get all persons
 app.get("/api/persons", (request, response) => {
-  response.json(persons);
+  Person.find({}).then((persons) => {
+    response.json(persons);
+  });
 });
 
 // get single person by id
