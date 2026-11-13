@@ -52,12 +52,15 @@ app.get("/", (request, response) => {
 
 // info endpoint
 app.get("/info", (request, response) => {
-  // get the date that the request was made
-  const date = new Date();
-  // create a string with the number of persons and the date
-  const info = `<p>Phonebook has info for ${persons.length} people</p><p>${date}</p>`;
-  // send the info string as the response
-  response.send(info);
+  // get the number of persons in the phonebook
+  Person.find({}).then((persons) => {
+    // get the date that the request was made
+    const date = new Date();
+    // create a string with the number of persons and the date
+    const info = `<p>Phonebook has info for ${persons.length} people</p><p>${date}</p>`;
+    // send the info string as the response
+    response.send(info);
+  });
 });
 
 // get all persons
