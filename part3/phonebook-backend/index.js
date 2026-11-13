@@ -100,17 +100,6 @@ app.post("/api/persons", (request, response) => {
     });
   }
 
-  // check if the name already exists in the persons array
-  /* For now ignore if name already exists
-  const nameExists = persons.some((person) => person.name === body.name);
-  // if name exists, return a 400 error with a message
-  if (nameExists) {
-    console.log("Name already exists");
-    return response.status(400).json({
-      error: "name must be unique",
-    });
-  }*/
-
   // create our person object with the data from the request body and a generated id
   const person = new Person({
     name: body.name,
@@ -121,6 +110,26 @@ app.post("/api/persons", (request, response) => {
   person.save().then((savedPerson) => {
     response.json(savedPerson);
   });
+});
+
+// update person
+app.put("/api/persons/:id", (request, response, next) => {
+  const { name, number } = request.body;
+
+  Person.findById(request.params.id)
+    .then((person) => {
+      if (!person) {
+        return response.status(404).end();
+      }
+
+      person.name = name;
+      person.number = number;
+
+      return person.save().then((updatedPerson) => {
+        response.json(updatedPerson);
+      });
+    })
+    .catch((error) => next(error));
 });
 
 // Error handling middleware
