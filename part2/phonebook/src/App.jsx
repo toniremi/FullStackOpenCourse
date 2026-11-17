@@ -113,25 +113,42 @@ const App = () => {
       };
 
       // add the new person to the server
-      personsService.create(personObject).then((returnedPerson) => {
-        // add the person to our persons array and set the state to the new array
-        setPersons(persons.concat(returnedPerson));
-        // reset input field states to empty
-        setNewName("");
-        setNewNumber("");
-        // set the success message to show the user that the number was added
-        setNotification({
-          message: `Added ${returnedPerson.name}`,
-          type: "success",
-        });
-        // clear the success message after 5 seconds
-        setTimeout(() => {
+      personsService
+        .create(personObject)
+        .then((returnedPerson) => {
+          // add the person to our persons array and set the state to the new array
+          setPersons(persons.concat(returnedPerson));
+          // reset input field states to empty
+          setNewName("");
+          setNewNumber("");
+          // set the success message to show the user that the number was added
           setNotification({
-            message: null,
-            type: null,
+            message: `Added ${returnedPerson.name}`,
+            type: "success",
           });
-        }, 5000);
-      });
+          // clear the success message after 5 seconds
+          setTimeout(() => {
+            setNotification({
+              message: null,
+              type: null,
+            });
+          }, 5000);
+        })
+        .catch((error) => {
+          console.log("error", error.response.data.error);
+          // set the error message to show the user that the number was not added
+          setNotification({
+            message: error.response.data.error,
+            type: "error",
+          });
+          // clear the error message after 5 seconds
+          setTimeout(() => {
+            setNotification({
+              message: null,
+              type: null,
+            });
+          }, 5000);
+        });
     }
   };
 
