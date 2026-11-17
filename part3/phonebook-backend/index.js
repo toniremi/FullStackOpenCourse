@@ -71,7 +71,7 @@ app.get("/api/persons", (request, response) => {
 });
 
 // get single person by id
-app.get("/api/persons/:id", (request, response) => {
+app.get("/api/persons/:id", (request, response, next) => {
   Person.findById(request.params.id)
     .then((note) => {
       if (note) {
@@ -84,7 +84,7 @@ app.get("/api/persons/:id", (request, response) => {
 });
 
 // delete person by id
-app.delete("/api/persons/:id", (request, response) => {
+app.delete("/api/persons/:id", (request, response, next) => {
   Person.findByIdAndDelete(request.params.id)
     .then((result) => {
       response.status(204).end();
