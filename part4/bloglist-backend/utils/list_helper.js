@@ -1,3 +1,6 @@
+const lodash = require('lodash');
+const logger = require('./logger');
+
 const dummy = (blogs) => {
   // ...
   return 1;
@@ -25,8 +28,26 @@ const favoriteBlog = (blogs) => {
   return favorite;
 }
 
+const mostBlogs = (blogs) => {
+  if (blogs.length === 0) {
+    return null;
+  }
+
+  const authorCounts = lodash.countBy(blogs, 'author');
+  logger.info('Author counts:', authorCounts);
+  const authors = Object.keys(authorCounts);
+  logger.info('Authors:', authors);
+  const maxAuthor = lodash.maxBy(authors, (author) => authorCounts[author]);
+  const maxBlogs = authorCounts[maxAuthor];
+  logger.info('Author with most blogs:', maxAuthor, 'with', maxBlogs, 'blogs');
+  
+
+  return { author: maxAuthor, blogs: maxBlogs };
+}
+
 module.exports = {
   dummy,
   totalLikes,
-  favoriteBlog
+  favoriteBlog,
+  mostBlogs
 }
