@@ -1,0 +1,10 @@
+### Add Blog Post (Local)
+POST http://localhost:3003/api/blogs
+content-type: application/json
+
+{
+    "title": "Testing Blog Post",
+    "author": "Antoni Remeseiro",
+    "url": "https://example.es/my-first-blog-post",
+    "likes": 0
+}
